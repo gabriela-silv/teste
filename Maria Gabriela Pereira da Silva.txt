@@ -1,0 +1,135 @@
+'''Equipe: inserir nome completo dos participantes
+1 - Maria Gabriela Pereira da Silva
+2 - Inácio Herculano da Silva Neto
+3 - João Henrique Leite da Silva
+4 - João Paulo Sigieski Bonetti
+5 - Rayanne Vanessa Figueiredo da Silva
+6 - Waleska Vitor Almeida
+'''
+
+#A listaManifestacoes está vazia para receber as manifestações adicionadas pelos usuários.
+
+listaManifestacoes = []
+
+#Variável armazenando número qualquer para iniciar o while.
+
+opcao = 0
+separadores = '•' * 60
+
+#Utilizamos separadores para identificar a saudação e menu
+print(separadores)
+print('Olá, seja bem-vindo(a) à Ouvidoria Unifacisa!')
+print("Para acessar nossos serviços, utilize as opções abaixo:")
+print(separadores)
+
+while opcao != 5:
+  print()
+  print('• MENU •')
+  print()
+  print('1) Listar as ocorrências')
+  print('2) Adicionar nova ocorrência')
+  print('3) Remover uma ocorrência')
+  print('4) Pesquisar uma ocorrência pelo código')
+  print('5) Sair')
+  print()
+  print(separadores)
+
+#Se o dado recebido for um número entre 1 e 5, a ação será executada, caso contrário, será solicitada nova entrada.
+
+  try:
+    opcao = int(input('Por favor, informe o número da opção desejada: '))
+    print()
+  except:
+    print('Operação inválida. Por favor, digite um número de 1 à 5, correspondente a opção desejada.')
+    print()
+
+  
+  tamanhoLista = len(listaManifestacoes)
+  naoHaReclamacoes = 'Nenhuma ocorrência cadastrada no sistema.'
+  codigoInvalido = 'Não há ocorrência com este código. Por favor, digite um código válido.'
+  operacaoInvalida = 'Operação inválida.'
+  
+   
+  if opcao == 1:
+    if tamanhoLista == 0:
+      print(naoHaReclamacoes)
+      
+    else:
+      print('Lista de ocorrências: ')
+      print()
+      for manifestacao in range(tamanhoLista):
+        print('→', manifestacao + 1,')', listaManifestacoes[manifestacao])
+  
+  
+
+  elif opcao == 2:
+    reclamacao = input('Informe a sua ocorrência: ')
+#Tratativa para que todos os elementos da lista sejam adicionados com letra maiúscula (padrão).
+    novaManifestacao = reclamacao.upper()
+    listaManifestacoes.append(novaManifestacao)
+    print()
+    codigoIdentificacao = tamanhoLista + 1
+    print()
+    print('Ocorrência cadastrada com sucesso. O código de identificação é',codigoIdentificacao,'!')
+    print()
+
+
+
+  elif opcao == 3:
+    if tamanhoLista == 0:
+      print(naoHaReclamacoes)
+
+    else:
+      print('Lista de ocorrências:')
+      print()
+      for manifestacao in range(tamanhoLista):
+        print('•', manifestacao + 1,')', listaManifestacoes[manifestacao])
+
+      print()
+
+#Se o dado recebido for um número correspondente ao código, a ação será executada. Caso contrário, será solicitada nova entrada.
+
+      try:
+        removerManifestacao = int(input('Informe o código da ocorrência que deseja remover: '))
+      
+        if removerManifestacao >= 1 and removerManifestacao <= tamanhoLista:
+          listaManifestacoes.pop(removerManifestacao -1)
+          print()
+          print('Ocorrência removida com sucesso!')
+
+        else:
+          print()
+          print(codigoInvalido)
+
+      except:
+        print(operacaoInvalida)
+
+
+  elif opcao == 4:
+    if tamanhoLista == 0:
+      print(naoHaReclamacoes)
+
+    else:
+#Se o dado recebido for um número correspondente ao código, a ação será executada. Caso contrário, será solicitada nova entrada.
+      try:
+        consultaCodigo = int(input('Informe o código que deseja consultar: '))
+        print()
+    
+
+        if consultaCodigo >= 1 and consultaCodigo <= tamanhoLista:
+          print('O título da ocorrência pesquisada é:',listaManifestacoes[consultaCodigo - 1])
+          print()
+          
+        else:
+          print()
+          print(codigoInvalido)
+
+      except:
+        print(operacaoInvalida)
+
+
+  elif opcao < 0 or opcao > 5:
+    print(operacaoInvalida)
+
+
+print('Obrigado por usar nosso canal. A sua opinião é muito importante para nós!')
